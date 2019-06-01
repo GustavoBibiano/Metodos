@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+			
+	</style>
+	<title>Metodos</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+<body>	
+		<br><br>
+		<div class="container">
+  			  <div class="form-row">
+    			<div class="col-6 ">
+    				<input type="text" class="form-control" id="texto">
+    			</div>
+    			<div class="col-2">
+    				<button type="button" class="btn btn-primary" id="mais">+</button>
+    			</div>
+    	 		</div><br>
+
+    <section class="container mt-3">
+	<div class="row">
+	<div class="col-6">
+
+	<form>
+    	 
+    	 <div class="border border-black p-2">
+    	  	<div class="form-group">
+    	  		
+   	 				<h1>Cor</h1>
+    	 				<button type="button" class="btn btn-danger btn-lg ml-2" id="Vermelho"></button>
+    	 				<button type="button" class="btn btn-secondary btn-lg ml-2" id="Cinza"></button>
+    	 				<button type="button" class="btn btn-primary btn-lg ml-2" id="Azul"></button>
+    	 	
+    	 </div>
+
+    	 	<div class="form-group">		
+   	 				<h1>Tamanho</h1>
+   	 				<div class="form-row">   
+   	 				<div class="col-6">
+						<button type="button" class="btn btn-primary" id="maiss">+</button>
+					</div>
+					<div class="col-6">
+						<button type="button" class="btn btn-primary" id="menos">-</button>
+					</div>
+					</div>
+			</div>
+
+			<div class="form-group">
+				<div class="form-row">
+				<div class="col-6">					
+					<button type="button" class="btn btn-primary" id="gravar">Gravar</button>		
+				</div>
+				<div class="col-6">	
+					<button type="button" class="btn btn-primary" id="limpar">Limpar</button>
+				</div>
+				</div>
+			</div>		
+
+			<div class="col-6">
+				<ul id="lista"></ul>
+			</div>
+		</div>
+
+	</form>
+	</div>
+	</div>
+	</section>
+		<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
+		<script>
+			var cor, lista, tamanho;
+				
+			$(document).ready(function(){
+			lista = localStorage.Lista;
+			cor = localStorage.Cor;
+			tamanho = parseInt(localStorage.Tamanho);
+			$('#lista').html(lista);
+			$('#lista').css('color',cor);
+			$('#lista').css('font-size',tamanho);
+		});
+
+		$(document).on('click','#mais',function(){
+			var texto = $('#texto').val();
+			$('#lista').append('<li class="mb-2" id="textoo">'+texto+'<button class="btn btn-primary"  id="sem-textoo">-</button></li>');
+			$('#texto').val("");
+		});
+		$(document).on('click','#sai-textoo',function(){
+			$($(this).parent("#textoo")).remove();
+		});
+
+		$(document).on('click','#Vermelho',function(){
+			cor = "red";
+			$('#lista').css('color',cor);
+		});
+
+		$(document).on('click','#Cinza',function(){
+			cor = "gray";
+			$('#lista').css('color',cor);
+		});
+
+		$(document).on('click','#Azul',function(){
+			cor = "blue"
+			$('#lista').css('color',cor);
+		});
+
+		$(document).on('click','#maiss',function(){
+			tamanhoantigo = parseInt($('#lista').css('font-size'));
+			tamanho = tamanhoantigo + 5;
+			$('#lista').css('font-size',tamanho);
+		});
+
+		$(document).on('click','#menos',function(){
+			tamanhoantigo = parseInt($('#lista').css('font-size'));
+			tamanho = tamanhoantigo - 5;
+			$('#lista').css('font-size',tamanho);
+		});
+
+		$(document).on('click','#gravar',function(){
+			lista = $('#lista').html();
+			localStorage.setItem("Lista",lista);
+			localStorage.setItem("Cor", cor);
+			localStorage.setItem("Tamanho", tamanho);
+		});
+
+		$(document).on('click','#limpar',function(){
+			$('#lista').empty();
+			$('#lista').css('font-size',15);
+			$('#lista-texto').css('color','black');
+			localStorage.removeItem("Lista");
+			localStorage.removeItem("Cor");
+			localStorage.removeItem("Tamanho");
+		});
+
+		
+		</script>
+
+
+
+			
+</body>
+</html>
